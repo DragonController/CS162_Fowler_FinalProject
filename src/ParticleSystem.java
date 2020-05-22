@@ -3,7 +3,6 @@ import processing.core.PApplet;
 import java.util.ArrayList;
 
 class ParticleSystem {
-
     final int NUMBER_OF_PARTICLES = 10;
     ArrayList<Particle> particles;
     int x;
@@ -13,6 +12,7 @@ class ParticleSystem {
         particles = new ArrayList<Particle>();
         x = p.width / 2;
         y = p.height / 2;
+        System.out.println(x);
         for (int i = 0; i < NUMBER_OF_PARTICLES; ++i) {
             particles.add(new Particle(x, y,p));
         }
@@ -36,5 +36,4 @@ class ParticleSystem {
     void draw() {
         for (Particle p : particles) p.draw();
     }
-
 }

@@ -1,6 +1,6 @@
 import processing.core.PApplet;
-class Particle {
 
+class Particle {
     PApplet p;
 
     final double ACCELERATION = 0.1;
