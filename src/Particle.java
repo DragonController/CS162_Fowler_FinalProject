@@ -20,14 +20,16 @@ abstract class Particle {
     float yAcceleration;
     int c;
     float size;
+    float startingSize;
 
     Particle(float x, float y, int c, PApplet p, ParticleSystem particleSystem) {
         this.x = x;
         this.y = y;
         this.c = c;
+        size = p.random(2, 10);
+        startingSize = size;
         this.p = p;
         this.particleSystem=particleSystem;
-        size = p.random(2, 10);
     }
 
     Particle(float x, float y, float xVelocity, float yVelocity, float size, int c, PApplet p, ParticleSystem particleSystem) {
@@ -36,13 +38,13 @@ abstract class Particle {
         this.xVelocity = xVelocity;
         this.yVelocity = yVelocity;
         this.size = size;
+        startingSize = size;
         this.c = c;
         this.p = p;
         this.particleSystem=particleSystem;
     }
 
     void draw() {
-        p.stroke(150);
         p.fill(c);
         p.ellipse(x, y, size, size);
     }
