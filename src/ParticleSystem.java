@@ -38,4 +38,8 @@ class ParticleSystem {
     void addParticle(Particle p) {
         particles.add(p);
     }
+
+    void deleteAllParticles() {
+        particles.clear();
+    }
 }

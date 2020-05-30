@@ -19,10 +19,23 @@ public class Sketch extends PApplet {
 
     public void mousePressed() {
         if (mouseButton == LEFT) {
-            particleSystem.addParticle(new Zombie(mouseX, mouseY, this, particleSystem));
+            particleSystem.addParticle(new Zombie(mouseX, mouseY,this, particleSystem));
         }
         if (mouseButton == RIGHT) {
-            particleSystem.addParticle(new Human(mouseX, mouseY, this, particleSystem));
+            particleSystem.addParticle(new Human(mouseX, mouseY,this, particleSystem));
+        }
+        if (mouseButton == CENTER) {
+            particleSystem.addParticle(new Zombie(mouseX, mouseY, 0, 0, 1, this, particleSystem));
+        }
+    }
+
+    public void keyPressed() {
+        if (key == 'r') {
+            particleSystem.deleteAllParticles();
+            particleSystem = new ParticleSystem(this);
+        }
+        if (key == ' ') {
+            particleSystem.deleteAllParticles();
         }
     }
 }
