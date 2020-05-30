@@ -2,6 +2,7 @@ import processing.core.PApplet;
 
 abstract class Particle {
     PApplet p;
+    ParticleSystem particleSystem;
 
     final float DENSITY_CONSTANT = (float) 1;
     final float DRAG_CONSTANT = (float) 0.01;
@@ -10,6 +11,7 @@ abstract class Particle {
     float targetX;
     float targetY;
     float targetAngle;
+    float distanceFromTarget;
     float x;
     float y;
     float xVelocity;
@@ -19,18 +21,24 @@ abstract class Particle {
     int c;
     float size;
 
-    Particle(PApplet p) {
-        x = p.mouseX;
-        y = p.mouseY;
-        this.p=p;
+    Particle(float x, float y, int c, PApplet p, ParticleSystem particleSystem) {
+        this.x = x;
+        this.y = y;
+        this.c = c;
+        this.p = p;
+        this.particleSystem=particleSystem;
         size = p.random(2, 10);
     }
 
-    Particle(int x, int y, PApplet p) {
+    Particle(float x, float y, float xVelocity, float yVelocity, float size, int c, PApplet p, ParticleSystem particleSystem) {
         this.x = x;
         this.y = y;
-        this.p=p;
-        size = p.random(2, 10);
+        this.xVelocity = xVelocity;
+        this.yVelocity = yVelocity;
+        this.size = size;
+        this.c = c;
+        this.p = p;
+        this.particleSystem=particleSystem;
     }
 
     void draw() {

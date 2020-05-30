@@ -3,8 +3,9 @@ import processing.core.PApplet;
 import java.util.ArrayList;
 
 class ParticleSystem {
+    static ArrayList<Particle> particles;
+    static int i;
     final int NUMBER_OF_HUMANS = 100;
-    ArrayList<Particle> particles;
     int startingX;
     int startingY;
 
@@ -12,7 +13,7 @@ class ParticleSystem {
         particles = new ArrayList<Particle>();
         startingX = p.width / 2;
         startingY = p.height / 2;
-        particles.add(new Zombie(startingX, startingY, p));
+        particles.add(new Zombie(startingX, startingY, p, this));
         for (int i = 0; i < NUMBER_OF_HUMANS; ++i) {
             int humanX = (int) p.random(0, p.width);
             int humanY = (int) p.random(0, p.height);
@@ -21,15 +22,15 @@ class ParticleSystem {
                 humanX = (int) p.random(0, p.width);
                 humanY = (int) p.random(0, p.height);
             }
-            particles.add(new Human(humanX, humanY, p));
+            particles.add(new Human(humanX, humanY, p, this));
         }
     }
 
     ParticleSystem(int startingX, int startingY, PApplet p) {
+        particles = new ArrayList<Particle>();
         this.startingX = Math.min(Math.max(startingX, 0), p.width);
         this.startingY = Math.min(Math.max(startingY, 0), p.height);
-        particles = new ArrayList<Particle>();
-        particles.add(new Zombie(startingX, startingY, p));
+        particles.add(new Zombie(startingX, startingY, p, this));
         for (int i = 0; i < NUMBER_OF_HUMANS; ++i) {
             int humanX = (int) p.random(0, p.width);
             int humanY = (int) p.random(0, p.height);
@@ -38,15 +39,13 @@ class ParticleSystem {
                 humanX = (int) p.random(0, p.width);
                 humanY = (int) p.random(0, p.height);
             }
-            System.out.println(distance);
-            particles.add(new Human(humanX, humanY, p));
+            particles.add(new Human(humanX, humanY, p, this));
         }
     }
 
     void update() {
-        for (Particle p : particles) {
-            p.move();
-        }
+        for (i = 0; i < ParticleSystem.particles.size(); i++)
+            ParticleSystem.particles.get(i).move();
     }
 
     void draw() {
