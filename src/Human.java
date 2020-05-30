@@ -12,12 +12,12 @@ public class Human extends Particle {
         currentAngle = (float) Math.atan2(yVelocity, xVelocity);
         targetX = this.x;
         targetY = this.y;
-        for (Particle particle : ParticleSystem.particles) {
-            if (particle instanceof Zombie) {
-                distanceFromTarget = (float) Math.sqrt(Math.pow(x - particle.x, 2) + Math.pow(y - particle.y, 2));
+        for (Particle p : ParticleSystem.particles) {
+            if (p instanceof Zombie) {
+                distanceFromTarget = (float) Math.sqrt(Math.pow(x - p.x, 2) + Math.pow(y - p.y, 2));
                 if (distanceFromTarget != 0) {
-                    targetX += (particle.x - x) / distanceFromTarget;
-                    targetY += (particle.y - y) / distanceFromTarget;
+                    targetX += (p.x - x) / distanceFromTarget;
+                    targetY += (p.y - y) / distanceFromTarget;
                 }
             }
         }

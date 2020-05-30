@@ -17,11 +17,11 @@ public class Zombie extends Particle {
     void move() {
         target = this;
         distanceFromTarget = -1;
-        for (Particle particle : ParticleSystem.particles) {
-            if (particle instanceof Human) {
-                if (distanceFromTarget == -1 || distanceFromTarget > Math.sqrt(Math.pow(x - particle.x, 2) + Math.pow(y - particle.y, 2))) {
-                    target = (Human) particle;
-                    distanceFromTarget = (float) Math.sqrt(Math.pow(x - particle.x, 2) + Math.pow(y - particle.y, 2));
+        for (Particle p : ParticleSystem.particles) {
+            if (p instanceof Human) {
+                if (distanceFromTarget == -1 || distanceFromTarget > Math.sqrt(Math.pow(x - p.x, 2) + Math.pow(y - p.y, 2))) {
+                    target = (Human) p;
+                    distanceFromTarget = (float) Math.sqrt(Math.pow(x - p.x, 2) + Math.pow(y - p.y, 2));
                 }
             }
         }
