@@ -1,6 +1,6 @@
 import processing.core.PApplet;
 
-public class ParticleCreator extends PApplet {
+public class Sketch extends PApplet {
     ParticleSystem particleSystem;
 
     public void settings() {
@@ -12,6 +12,8 @@ public class ParticleCreator extends PApplet {
     }
 
     public void draw() {
+        background(255);
         particleSystem.draw();
+        particleSystem.update();
     }
 }

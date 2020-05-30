@@ -3,27 +3,43 @@ import processing.core.PApplet;
 import java.util.ArrayList;
 
 class ParticleSystem {
-    final int NUMBER_OF_PARTICLES = 10;
+    final int NUMBER_OF_HUMANS = 100;
     ArrayList<Particle> particles;
-    int x;
-    int y;
+    int startingX;
+    int startingY;
 
     ParticleSystem(PApplet p) {
         particles = new ArrayList<Particle>();
-        x = p.width / 2;
-        y = p.height / 2;
-        System.out.println(x);
-        for (int i = 0; i < NUMBER_OF_PARTICLES; ++i) {
-            particles.add(new Particle(x, y,p));
+        startingX = p.width / 2;
+        startingY = p.height / 2;
+        particles.add(new Zombie(startingX, startingY, p));
+        for (int i = 0; i < NUMBER_OF_HUMANS; ++i) {
+            int humanX = (int) p.random(0, p.width);
+            int humanY = (int) p.random(0, p.height);
+            double distance = Math.min(p.width, p.height) / 4.0;
+            while (Math.sqrt(Math.pow(humanX - startingX, 2) + Math.pow(humanY - startingY, 2)) < distance) {
+                humanX = (int) p.random(0, p.width);
+                humanY = (int) p.random(0, p.height);
+            }
+            particles.add(new Human(humanX, humanY, p));
         }
     }
 
-    ParticleSystem(int x, int y, PApplet p) {
-        this.x = x;
-        this.y = y;
+    ParticleSystem(int startingX, int startingY, PApplet p) {
+        this.startingX = Math.min(Math.max(startingX, 0), p.width);
+        this.startingY = Math.min(Math.max(startingY, 0), p.height);
         particles = new ArrayList<Particle>();
-        for (int i = 0; i < NUMBER_OF_PARTICLES; ++i) {
-            particles.add(new Particle(x, y,p));
+        particles.add(new Zombie(startingX, startingY, p));
+        for (int i = 0; i < NUMBER_OF_HUMANS; ++i) {
+            int humanX = (int) p.random(0, p.width);
+            int humanY = (int) p.random(0, p.height);
+            double distance = Math.min(p.width, p.height) / 4.0;
+            while (Math.sqrt(Math.pow(humanX - startingX, 2) + Math.pow(humanY - startingY, 2)) < distance) {
+                humanX = (int) p.random(0, p.width);
+                humanY = (int) p.random(0, p.height);
+            }
+            System.out.println(distance);
+            particles.add(new Human(humanX, humanY, p));
         }
     }
 

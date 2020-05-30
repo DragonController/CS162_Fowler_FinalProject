@@ -1,14 +1,21 @@
 import processing.core.PApplet;
 
-class Particle {
+abstract class Particle {
     PApplet p;
 
-    final double ACCELERATION = 0.1;
+    final float DENSITY_CONSTANT = (float) 1;
+    final float DRAG_CONSTANT = (float) 0.01;
 
+    float currentAngle;
+    float targetX;
+    float targetY;
+    float targetAngle;
     float x;
     float y;
     float xVelocity;
     float yVelocity;
+    float xAcceleration;
+    float yAcceleration;
     int c;
     float size;
 
@@ -16,19 +23,13 @@ class Particle {
         x = p.mouseX;
         y = p.mouseY;
         this.p=p;
-        xVelocity = p.random(-5, 5);
-        yVelocity = p.random(-4, 0);
-        c = p.color(p.random(100, 255), p.random(100, 255), p.random(100, 255), 75);
-        size = p.random(10, 20);
+        size = p.random(2, 10);
     }
 
     Particle(int x, int y, PApplet p) {
         this.x = x;
         this.y = y;
         this.p=p;
-        xVelocity = p.random(-2, 2);
-        yVelocity = p.random(-4, 0);
-        c = p.color(p.random(100, 255), p.random(100, 255), p.random(100, 255), 75);
         size = p.random(2, 10);
     }
 
@@ -38,9 +39,5 @@ class Particle {
         p.ellipse(x, y, size, size);
     }
 
-    void move() {
-        x += xVelocity;
-        y += yVelocity;
-        yVelocity += ACCELERATION;
-    }
+    abstract void move();
 }
