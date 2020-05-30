@@ -60,16 +60,15 @@ public class Zombie extends Particle {
             y = p.height;
             yVelocity *= -1;
         }
-        time = p.millis();
         if (size - time / 1000000 > 1) {
             size -= time / 1000000;
             c = p.color(0, 255 * ((size - 1) / (startingSize)), 0);
+            if (Math.sqrt(Math.pow(x - targetX, 2) + Math.pow(y - targetY, 2)) < (size + target.size) / 2 && target != this) {
+                ParticleSystem.particles.remove(target);
+                ParticleSystem.particles.add(new Zombie(targetX, targetY, target.xVelocity, target.yVelocity, target.size, p, particleSystem));
+            }
         } else {
             ParticleSystem.particles.remove(this);
-        }
-        if (Math.sqrt(Math.pow(x - targetX, 2) + Math.pow(y - targetY, 2)) < (size + target.size) / 2 && target != this) {
-            ParticleSystem.particles.remove(target);
-            ParticleSystem.particles.add(new Zombie(targetX, targetY, target.xVelocity, target.yVelocity, target.size, p, particleSystem));
         }
     }
 }

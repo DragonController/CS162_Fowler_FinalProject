@@ -3,6 +3,8 @@ import processing.core.PApplet;
 public class Sketch extends PApplet {
     ParticleSystem particleSystem;
 
+    boolean middleMouseButton = false;
+
     public void settings() {
         size(500,500);
     }
@@ -13,6 +15,8 @@ public class Sketch extends PApplet {
 
     public void draw() {
         background(255);
+        if (middleMouseButton)
+            particleSystem.addParticle(new Zombie(mouseX, mouseY, 0, 0, 0, this, particleSystem));
         particleSystem.draw();
         particleSystem.update();
     }
@@ -25,7 +29,13 @@ public class Sketch extends PApplet {
             particleSystem.addParticle(new Human(mouseX, mouseY,this, particleSystem));
         }
         if (mouseButton == CENTER) {
-            particleSystem.addParticle(new Zombie(mouseX, mouseY, 0, 0, 1, this, particleSystem));
+            middleMouseButton = true;
+        }
+    }
+
+    public void mouseReleased() {
+        if (mouseButton == CENTER) {
+            middleMouseButton = false;
         }
     }
 
