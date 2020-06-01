@@ -1,20 +1,19 @@
 import processing.core.PApplet;
 
 public class Zombie extends Particle {
-
     Particle target;
 
-    float time = 0;
+    final float DECAY_SPEED = 1000000;
 
     Zombie(float x, float y, PApplet p, ParticleSystem particleSystem) {
-        super(x, y, p.color(0, 255, 0), p, particleSystem);
+        super(x, y, 10, p.color(0, 255, 0), p, particleSystem);
     }
 
     Zombie(float x, float y, float xVelocity, float yVelocity, float size, PApplet p, ParticleSystem particleSystem) {
         super(x, y, xVelocity, yVelocity, size, p.color(0, 255, 0), p, particleSystem);
     }
 
-    void move() {
+    void move(int millis) {
         target = this;
         distanceFromTarget = -1;
         for (Particle p : ParticleSystem.particles) {
@@ -60,10 +59,10 @@ public class Zombie extends Particle {
             y = p.height;
             yVelocity *= -1;
         }
-        if (size - time / 1000000 > 1) {
-            size -= time / 1000000;
+        if (size - millis / DECAY_SPEED > 1) {
+            size -= millis / DECAY_SPEED;
             c = p.color(0, 255 * ((size - 1) / (startingSize)), 0);
-            if (Math.sqrt(Math.pow(x - targetX, 2) + Math.pow(y - targetY, 2)) < (size + target.size) / 2 && target != this) {
+            if (Math.sqrt(Math.pow(x - targetX, 2) + Math.pow(y - targetY, 2)) <= (size + target.size) / 2 && target != this) {
                 ParticleSystem.particles.remove(target);
                 ParticleSystem.particles.add(new Zombie(targetX, targetY, target.xVelocity, target.yVelocity, target.size, p, particleSystem));
             }

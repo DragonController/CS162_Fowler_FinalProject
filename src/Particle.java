@@ -4,7 +4,7 @@ abstract class Particle {
     PApplet p;
     ParticleSystem particleSystem;
 
-    final float DENSITY_CONSTANT = (float) 1;
+    final float DENSITY_CONSTANT = 1;
     final float DRAG_CONSTANT = (float) 0.01;
 
     float currentAngle;
@@ -22,11 +22,11 @@ abstract class Particle {
     float size;
     float startingSize;
 
-    Particle(float x, float y, int c, PApplet p, ParticleSystem particleSystem) {
+    Particle(float x, float y, float size, int c, PApplet p, ParticleSystem particleSystem) {
         this.x = x;
         this.y = y;
         this.c = c;
-        size = p.random(2, 10);
+        this.size = size;
         startingSize = size;
         this.p = p;
         this.particleSystem=particleSystem;
@@ -49,5 +49,5 @@ abstract class Particle {
         p.ellipse(x, y, size, size);
     }
 
-    abstract void move();
+    abstract void move(int millis);
 }
