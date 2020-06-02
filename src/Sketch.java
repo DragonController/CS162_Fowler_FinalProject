@@ -41,7 +41,8 @@ public class Sketch extends PApplet {
 
     public void keyPressed() {
         if (key == 'r') {
-            particleSystem.resetParticles();
+            particleSystem.deleteAllParticles();
+            particleSystem.createParticles();
         }
         if (key == ' ') {
             particleSystem.deleteAllParticles();
