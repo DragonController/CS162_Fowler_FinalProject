@@ -1,9 +1,9 @@
 import processing.core.PApplet;
 
 public class Sketch extends PApplet {
-    ParticleSystem particleSystem;
+    private ParticleSystem particleSystem;
 
-    boolean middleMouseButton = false;
+    private boolean middleMouseButton = false;
 
     public void settings() {
         size(500,500);
@@ -19,6 +19,10 @@ public class Sketch extends PApplet {
             particleSystem.addParticle(new Zombie(mouseX, mouseY, 0, 0, 0, this, particleSystem));
         particleSystem.draw();
         particleSystem.update();
+        textSize(12);
+        fill(0);
+        text("Humans: " + particleSystem.getHumans(), width / 2 - textWidth("Humans: " + particleSystem.getHumans()) / 2, 20);
+        text("Zombies: " + particleSystem.getZombies(), width / 2 - textWidth("Zombies: " + particleSystem.getZombies()) / 2, height - 10);
     }
 
     public void mousePressed() {

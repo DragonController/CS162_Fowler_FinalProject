@@ -6,7 +6,7 @@ public class Human extends Particle {
         super(x, y, p.random(2, 10), p.color(255, 0, 255), p, particleSystem);
     }
 
-    void calculate() {
+    public void calculate() {
         targetX = this.x;
         targetY = this.y;
         for (Particle p : ParticleSystem.particles) {

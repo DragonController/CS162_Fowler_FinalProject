@@ -20,9 +20,9 @@ abstract class Particle {
     float yAcceleration;
     int c;
     float size;
-    float startingSize;
+    final float startingSize;
 
-    Particle(float x, float y, float size, int c, PApplet p, ParticleSystem particleSystem) {
+    public Particle(float x, float y, float size, int c, PApplet p, ParticleSystem particleSystem) {
         this.x = x;
         this.y = y;
         this.c = c;
@@ -32,7 +32,7 @@ abstract class Particle {
         this.particleSystem=particleSystem;
     }
 
-    Particle(float x, float y, float xVelocity, float yVelocity, float size, int c, PApplet p, ParticleSystem particleSystem) {
+    public Particle(float x, float y, float xVelocity, float yVelocity, float size, int c, PApplet p, ParticleSystem particleSystem) {
         this.x = x;
         this.y = y;
         this.xVelocity = xVelocity;
@@ -44,14 +44,14 @@ abstract class Particle {
         this.particleSystem=particleSystem;
     }
 
-    void draw() {
+    public void draw() {
         p.fill(c);
         p.ellipse(x, y, size, size);
     }
 
-    abstract void calculate();
+    public abstract void calculate();
 
-    void move() {
+    public void move() {
         currentAngle = (float) Math.atan2(yVelocity, xVelocity);
         if (targetX != x || targetY != y) {
             xAcceleration = (float) (DENSITY_CONSTANT * Math.cos(targetAngle) / Math.pow(size, 2) - xVelocity * DRAG_CONSTANT);

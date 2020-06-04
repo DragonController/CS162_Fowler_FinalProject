@@ -4,14 +4,14 @@ import java.util.ArrayList;
 
 class ParticleSystem {
     static ArrayList<Particle> particles;
-    static int i;
-    final int STARTING_NUMBER_OF_HUMANS = 100;
-    int startingX;
-    int startingY;
+
+    private final int STARTING_NUMBER_OF_HUMANS = 100;
+    private final int startingX;
+    private final int startingY;
     PApplet p;
     float currentTime = System.nanoTime();
 
-    ParticleSystem(PApplet p) {
+    public ParticleSystem(PApplet p) {
         this.p = p;
         particles = new ArrayList<Particle>();
         startingX = p.width / 2;
@@ -19,25 +19,25 @@ class ParticleSystem {
         createParticles();
     }
 
-    void update() {
-        for (i = 0; i < ParticleSystem.particles.size(); i++)
+    public void update() {
+        for (int i = 0; i < ParticleSystem.particles.size(); i++)
             ParticleSystem.particles.get(i).calculate();
         currentTime = System.nanoTime();
     }
 
-    void draw() {
+    public void draw() {
         for (Particle p : particles) p.draw();
     }
 
-    void addParticle(Particle p) {
+    public void addParticle(Particle p) {
         particles.add(p);
     }
 
-    void deleteAllParticles() {
+    public void deleteAllParticles() {
         particles.clear();
     }
 
-    void createParticles() {
+    public void createParticles() {
         particles.add(new Zombie(startingX, startingY, p, this));
         for (int i = 0; i < STARTING_NUMBER_OF_HUMANS; i++) {
             int humanX = (int) p.random(0, p.width);
@@ -49,5 +49,23 @@ class ParticleSystem {
             }
             particles.add(new Human(humanX, humanY, p, this));
         }
+    }
+
+    public int getHumans() {
+        int numOfHumans = 0;
+        for (Particle particle : particles) {
+            if (particle instanceof Human)
+                numOfHumans++;
+        }
+        return numOfHumans;
+    }
+
+    public int getZombies() {
+        int numOfZombies = 0;
+        for (Particle particle : particles) {
+            if (particle instanceof Zombie)
+                numOfZombies++;
+        }
+        return numOfZombies;
     }
 }
