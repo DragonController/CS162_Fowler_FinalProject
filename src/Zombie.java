@@ -6,7 +6,7 @@ public class Zombie extends Particle {
     private final float DECAY_SPEED = 1000000000;
 
     public Zombie(float x, float y, PApplet p, ParticleSystem particleSystem) {
-        super(x, y, 10, p.color(0, 255, 0), p, particleSystem);
+        super(x, y, p.color(0, 255, 0), p, particleSystem);
     }
 
     public Zombie(float x, float y, float xVelocity, float yVelocity, float size, PApplet p, ParticleSystem particleSystem) {

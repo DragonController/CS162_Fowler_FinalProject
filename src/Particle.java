@@ -22,11 +22,11 @@ abstract class Particle {
     private float size;
     private final float startingSize;
 
-    public Particle(float x, float y, float size, int c, PApplet p, ParticleSystem particleSystem) {
+    public Particle(float x, float y, int c, PApplet p, ParticleSystem particleSystem) {
         this.x = x;
         this.y = y;
         this.c = c;
-        this.size = size;
+        size = p.random(2, 10);
         startingSize = size;
         this.p = p;
         this.particleSystem=particleSystem;

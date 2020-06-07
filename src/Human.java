@@ -2,7 +2,7 @@ import processing.core.PApplet;
 
 public class Human extends Particle {
     public Human(float x, float y, PApplet p, ParticleSystem particleSystem) {
-        super(x, y, p.random(2, 10), p.color(255, 0, 255), p, particleSystem);
+        super(x, y, p.color(255, 0, 255), p, particleSystem);
     }
 
     public void calculate() {
