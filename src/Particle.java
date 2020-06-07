@@ -1,8 +1,8 @@
 import processing.core.PApplet;
 
 abstract class Particle {
-    PApplet p;
-    ParticleSystem particleSystem;
+    private PApplet p;
+    private ParticleSystem particleSystem;
 
     private final float DENSITY_CONSTANT = 1;
     private final float DRAG_CONSTANT = (float) 0.01;
@@ -84,6 +84,14 @@ abstract class Particle {
             y = p.height;
             yVelocity *= -1;
         }
+    }
+
+    public PApplet getP() {
+        return p;
+    }
+
+    public ParticleSystem getParticleSystem() {
+        return particleSystem;
     }
 
     public float getTargetX() {

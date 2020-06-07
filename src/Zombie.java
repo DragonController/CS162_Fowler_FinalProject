@@ -28,12 +28,12 @@ public class Zombie extends Particle {
         setTargetY(target.getY());
         setTargetAngle((float) Math.atan2(getTargetY() - getY(), getTargetX() - getX()));
         move();
-        if (getSize() - (System.nanoTime() - particleSystem.getCurrentTime()) / DECAY_SPEED > 1) {
-            setSize(getSize() - (System.nanoTime() - particleSystem.getCurrentTime()) / DECAY_SPEED);
-            setC(p.color(0, 255 * ((getSize() - 1) / (getStartingSize())), 0));
+        if (getSize() - (System.nanoTime() - getParticleSystem().getCurrentTime()) / DECAY_SPEED > 1) {
+            setSize(getSize() - (System.nanoTime() - getParticleSystem().getCurrentTime()) / DECAY_SPEED);
+            setC(getP().color(0, 255 * ((getSize() - 1) / (getStartingSize())), 0));
             if (Math.sqrt(Math.pow(getX() - getTargetX(), 2) + Math.pow(getY() - getTargetY(), 2)) <= (getSize() + target.getSize()) / 2 && target != this) {
                 ParticleSystem.particles.remove(target);
-                ParticleSystem.particles.add(new Zombie(getTargetX(), getTargetY(), target.getXVelocity(), target.getYVelocity(), target.getSize(), p, particleSystem));
+                ParticleSystem.particles.add(new Zombie(getTargetX(), getTargetY(), target.getXVelocity(), target.getYVelocity(), target.getSize(), getP(), getParticleSystem()));
             }
         } else {
             ParticleSystem.particles.remove(this);
