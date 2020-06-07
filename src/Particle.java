@@ -4,23 +4,23 @@ abstract class Particle {
     PApplet p;
     ParticleSystem particleSystem;
 
-    final float DENSITY_CONSTANT = 1;
-    final float DRAG_CONSTANT = (float) 0.01;
+    private final float DENSITY_CONSTANT = 1;
+    private final float DRAG_CONSTANT = (float) 0.01;
 
-    float currentAngle;
-    float targetX;
-    float targetY;
-    float targetAngle;
-    float distanceFromTarget;
-    float x;
-    float y;
-    float xVelocity;
-    float yVelocity;
-    float xAcceleration;
-    float yAcceleration;
-    int c;
-    float size;
-    final float startingSize;
+    private float currentAngle;
+    private float targetX;
+    private float targetY;
+    private float targetAngle;
+    private float distanceFromTarget;
+    private float x;
+    private float y;
+    private float xVelocity;
+    private float yVelocity;
+    private float xAcceleration;
+    private float yAcceleration;
+    private int c;
+    private float size;
+    private final float startingSize;
 
     public Particle(float x, float y, float size, int c, PApplet p, ParticleSystem particleSystem) {
         this.x = x;
@@ -84,5 +84,65 @@ abstract class Particle {
             y = p.height;
             yVelocity *= -1;
         }
+    }
+
+    public float getTargetX() {
+        return targetX;
+    }
+
+    public void setTargetX(float targetX) {
+        this.targetX = targetX;
+    }
+
+    public float getTargetY() {
+        return targetY;
+    }
+
+    public void setTargetY(float targetY) {
+        this.targetY = targetY;
+    }
+
+    public void setTargetAngle(float targetAngle) {
+        this.targetAngle = targetAngle;
+    }
+
+    public float getDistanceFromTarget() {
+        return distanceFromTarget;
+    }
+
+    public void setDistanceFromTarget(float distanceFromTarget) {
+        this.distanceFromTarget = distanceFromTarget;
+    }
+
+    public float getX() {
+        return x;
+    }
+
+    public float getY() {
+        return y;
+    }
+
+    public float getXVelocity() {
+        return xVelocity;
+    }
+
+    public float getYVelocity() {
+        return yVelocity;
+    }
+
+    public void setC(int c) {
+        this.c = c;
+    }
+
+    public float getSize() {
+        return size;
+    }
+
+    public void setSize(float size) {
+        this.size = size;
+    }
+
+    public float getStartingSize() {
+        return startingSize;
     }
 }

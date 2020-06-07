@@ -15,25 +15,25 @@ public class Zombie extends Particle {
 
     public void calculate() {
         target = this;
-        distanceFromTarget = -1;
+        setDistanceFromTarget(-1);
         for (Particle p : ParticleSystem.particles) {
             if (p instanceof Human) {
-                if (distanceFromTarget == -1 || distanceFromTarget > Math.sqrt(Math.pow(x - p.x, 2) + Math.pow(y - p.y, 2))) {
+                if (getDistanceFromTarget() == -1 || getDistanceFromTarget() > Math.sqrt(Math.pow(getX() - p.getX(), 2) + Math.pow(getY() - p.getY(), 2))) {
                     target = p;
-                    distanceFromTarget = (float) Math.sqrt(Math.pow(x - p.x, 2) + Math.pow(y - p.y, 2));
+                    setDistanceFromTarget((float) Math.sqrt(Math.pow(getX() - p.getX(), 2) + Math.pow(getY() - p.getY(), 2)));
                 }
             }
         }
-        targetX = target.x;
-        targetY = target.y;
-        targetAngle = (float) Math.atan2(targetY - y, targetX - x);
+        setTargetX(target.getX());
+        setTargetY(target.getY());
+        setTargetAngle((float) Math.atan2(getTargetY() - getY(), getTargetX() - getX()));
         move();
-        if (size - (System.nanoTime() - particleSystem.currentTime) / DECAY_SPEED > 1) {
-            size -= (System.nanoTime() - particleSystem.currentTime) / DECAY_SPEED;
-            c = p.color(0, 255 * ((size - 1) / (startingSize)), 0);
-            if (Math.sqrt(Math.pow(x - targetX, 2) + Math.pow(y - targetY, 2)) <= (size + target.size) / 2 && target != this) {
+        if (getSize() - (System.nanoTime() - particleSystem.getCurrentTime()) / DECAY_SPEED > 1) {
+            setSize(getSize() - (System.nanoTime() - particleSystem.getCurrentTime()) / DECAY_SPEED);
+            setC(p.color(0, 255 * ((getSize() - 1) / (getStartingSize())), 0));
+            if (Math.sqrt(Math.pow(getX() - getTargetX(), 2) + Math.pow(getY() - getTargetY(), 2)) <= (getSize() + target.getSize()) / 2 && target != this) {
                 ParticleSystem.particles.remove(target);
-                ParticleSystem.particles.add(new Zombie(targetX, targetY, target.xVelocity, target.yVelocity, target.size, p, particleSystem));
+                ParticleSystem.particles.add(new Zombie(getTargetX(), getTargetY(), target.getXVelocity(), target.getYVelocity(), target.getSize(), p, particleSystem));
             }
         } else {
             ParticleSystem.particles.remove(this);

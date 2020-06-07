@@ -1,24 +1,23 @@
 import processing.core.PApplet;
 
 public class Human extends Particle {
-
-    Human(float x, float y, PApplet p, ParticleSystem particleSystem) {
+    public Human(float x, float y, PApplet p, ParticleSystem particleSystem) {
         super(x, y, p.random(2, 10), p.color(255, 0, 255), p, particleSystem);
     }
 
     public void calculate() {
-        targetX = this.x;
-        targetY = this.y;
+        setTargetX(this.getX());
+        setTargetY(this.getY());
         for (Particle p : ParticleSystem.particles) {
             if (p instanceof Zombie) {
-                distanceFromTarget = (float) (Math.pow(x - p.x, 2) + Math.pow(y - p.y, 2));
-                if (distanceFromTarget != 0) {
-                    targetX += (p.x - x) / distanceFromTarget;
-                    targetY += (p.y - y) / distanceFromTarget;
+                setDistanceFromTarget((float) (Math.pow(getX() - p.getX(), 2) + Math.pow(getY() - p.getY(), 2)));
+                if (getDistanceFromTarget() != 0) {
+                    setTargetX(getTargetX() + (p.getX() - getX()) / getDistanceFromTarget());
+                    setTargetY(getTargetY() + (p.getY() - getY()) / getDistanceFromTarget());
                 }
             }
         }
-        targetAngle = (float) (Math.atan2(targetY - y, targetX - x) + Math.PI);
+        setTargetAngle((float) (Math.atan2(getTargetY() - getY(), getTargetX() - getX()) + Math.PI));
         move();
     }
 }

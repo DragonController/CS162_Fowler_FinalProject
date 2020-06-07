@@ -5,11 +5,12 @@ import java.util.ArrayList;
 class ParticleSystem {
     static ArrayList<Particle> particles;
 
-    private final int STARTING_NUMBER_OF_HUMANS = 100;
+    private int STARTING_NUMBER_OF_HUMANS;
     private final int startingX;
     private final int startingY;
-    PApplet p;
-    float currentTime = System.nanoTime();
+    private PApplet p;
+
+    private float currentTime = System.nanoTime();
 
     public ParticleSystem(PApplet p) {
         this.p = p;
@@ -39,6 +40,7 @@ class ParticleSystem {
 
     public void createParticles() {
         particles.add(new Zombie(startingX, startingY, p, this));
+        STARTING_NUMBER_OF_HUMANS = (int) p.random(50, 100);
         for (int i = 0; i < STARTING_NUMBER_OF_HUMANS; i++) {
             int humanX = (int) p.random(0, p.width);
             int humanY = (int) p.random(0, p.height);
@@ -49,6 +51,10 @@ class ParticleSystem {
             }
             particles.add(new Human(humanX, humanY, p, this));
         }
+    }
+
+    public float getCurrentTime() {
+        return currentTime;
     }
 
     public int getHumans() {
